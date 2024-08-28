@@ -68,13 +68,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "nombres",
-									"value": "James",
+									"key": "telefono",
+									"value": "48562301",
 									"type": "text"
 								}
 							]
 						},
-						"url": "http://localhost:2880/actualizarEmpleado/66cf41469de7514b57e929a1"
+						"url": "http://localhost:2880/actualizarEmpleado/66cf48422380a3bb2c488238"
 					},
 					"response": []
 				},
@@ -103,6 +103,86 @@
 							]
 						},
 						"url": "http://localhost:2880/buscarEmpleado"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categoría",
+			"item": [
+				{
+					"name": "Agregar Categoría",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "categoria",
+									"value": "Eléctricos",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/agregarCategoria"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Categorías",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:2880/mostrarCategorias"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Categoría",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "categoria",
+									"value": "Pequeños",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/actualizarCategoria/66cf5c4f4de6a2a4f2a1c74f"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoría",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:2880/eliminarCategoria/66cf5c4f4de6a2a4f2a1c74f"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Categoría",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "search",
+									"value": "Electricos",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/buscarCategoria"
 					},
 					"response": []
 				}

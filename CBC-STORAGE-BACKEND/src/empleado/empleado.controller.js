@@ -53,6 +53,18 @@ export const update=async(req,res)=>{
         let {id}=req.params
         let data=req.body
 
+        //Validación para que el teléfono sea diferente
+        let telefonoEncontrado = await Empleado.find({ telefono: data.telefono });
+        if (telefonoEncontrado.length > 0) {
+            return res.status(400).send({ message: 'El número de teléfono ya está asignado a otra persona' });
+        }
+
+        //Validación para que el email sea diferente
+        let emailEncontrado=await Empleado.find({email: data.email})
+        if(emailEncontrado.length>0){
+            return res.status(400).send({message: 'El email ya está asignado a otra persona'})
+        }
+
         let updatedEmpleado=await Empleado.findOneAndUpdate(
             {_id: id},
             data,
