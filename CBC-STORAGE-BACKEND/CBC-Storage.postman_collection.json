@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "d7569101-1c62-4c51-9422-a7be9caafbe6",
+		"name": "CBC-Storage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33173724"
+	},
+	"item": [
+		{
+			"name": "empleado",
+			"item": [
+				{
+					"name": "Agregar Empleado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombres",
+									"value": "Pablo Antonio",
+									"type": "text"
+								},
+								{
+									"key": "apellidos",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "pablo@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "48562010",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/agregarEmpleado"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Empleados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:2880/mostrarEmpleados"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Empleado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombres",
+									"value": "James",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/actualizarEmpleado/66cf41469de7514b57e929a1"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Empleado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:2880/eliminarEmpleado/66cf47da2380a3bb2c488233"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Empleado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "search",
+									"value": "Luis",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/buscarEmpleado"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

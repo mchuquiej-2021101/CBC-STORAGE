@@ -4,6 +4,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import { config } from 'dotenv'
+import empleadoRoutes from '../src/empleado/empleado.routes.js'
 
 //Configuraciones
 const app = express() //Crear el servidor
@@ -16,6 +17,9 @@ app.use(express.json())
 app.use(cors()) //Aceptar o denegar las solicitudes de diferentes orígenes (local, remoto) /políticas de acceso
 app.use(helmet()) //Aplica capa de seguridad
 app.use(morgan('dev')) //Crea logs de solicitudes al servidor HTTP
+
+//Declaración de rutas
+app.use(empleadoRoutes)
 
 //Levantar el servidor
 export const initServer = () => {
