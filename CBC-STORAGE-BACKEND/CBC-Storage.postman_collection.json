@@ -187,6 +187,91 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "ubicacion",
+			"item": [
+				{
+					"name": "Agregar Ubicación",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ubicacion",
+									"value": "Esquina abajo",
+									"type": "text"
+								},
+								{
+									"key": "capacidad",
+									"value": "15",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/agregarUbicacion"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Ubicaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:2880/mostrarUbicaciones"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Ubicacion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ubicacion",
+									"value": "Esquina derecha",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/actualizarUbicacion/66d0d4e1c41a747603f5ab7f"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Ubicación",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:2880/eliminarUbicacion/66d0d4e1c41a747603f5ab7f"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Ubicación",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "search",
+									"value": "arriba",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/buscarUbicacion"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

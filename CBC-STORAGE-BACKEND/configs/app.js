@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import { config } from 'dotenv'
 import empleadoRoutes from '../src/empleado/empleado.routes.js'
 import categoriaRoutes from '../src/categoria/categoria.routes.js'
+import ubicacionRoutes from '../src/ubicacion/ubicacion.routes.js'
 
 //Configuraciones
 const app = express() //Crear el servidor
@@ -22,6 +23,7 @@ app.use(morgan('dev')) //Crea logs de solicitudes al servidor HTTP
 //Declaración de rutas
 app.use(empleadoRoutes)
 app.use(categoriaRoutes)
+app.use(ubicacionRoutes)
 
 //Levantar el servidor
 export const initServer = () => {
