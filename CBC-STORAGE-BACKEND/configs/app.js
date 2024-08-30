@@ -8,6 +8,7 @@ import empleadoRoutes from '../src/empleado/empleado.routes.js'
 import categoriaRoutes from '../src/categoria/categoria.routes.js'
 import ubicacionRoutes from '../src/ubicacion/ubicacion.routes.js'
 import herramientaRoutes from '../src/herramienta/herramienta.routes.js'
+import prestamoRoutes from '../src/prestamo/prestamo.routes.js'
 
 //Configuraciones
 const app = express() //Crear el servidor
@@ -26,6 +27,7 @@ app.use(empleadoRoutes)
 app.use(categoriaRoutes)
 app.use(ubicacionRoutes)
 app.use(herramientaRoutes)
+app.use(prestamoRoutes)
 
 //Levantar el servidor
 export const initServer = () => {
