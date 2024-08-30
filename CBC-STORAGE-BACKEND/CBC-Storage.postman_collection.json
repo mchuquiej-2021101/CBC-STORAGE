@@ -272,6 +272,116 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "herramienta",
+			"item": [
+				{
+					"name": "Agregar Herramienta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "SKU",
+									"value": "dsa-dsa-dsa",
+									"type": "text"
+								},
+								{
+									"key": "nombre",
+									"value": "Martillo",
+									"type": "text"
+								},
+								{
+									"key": "marca",
+									"value": "dell",
+									"type": "text"
+								},
+								{
+									"key": "modelo",
+									"value": "135ds",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "66cf5c144de6a2a4f2a1c74c",
+									"type": "text"
+								},
+								{
+									"key": "ubicacion",
+									"value": "66d0d56dc896dd9e4a97667d",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/agregarHerramienta"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Herramientas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:2880/mostrarHerramientas"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Herramienta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "computadora",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/actualizarHerramienta/66d201dee4369fa167846d9b"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Ubicación",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:2880/eliminarHerramienta/66d1f07b005c2ba8bad52e82"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Herramienta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "search",
+									"value": "a",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/buscarHerramienta"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

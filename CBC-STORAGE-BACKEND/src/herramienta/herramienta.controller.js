@@ -1,0 +1,135 @@
+import Herramienta from '../herramienta/herramienta.model.js';
+import Categoria from '../categoria/categoria.model.js';
+import Ubicacion from '../ubicacion/ubicacion.model.js';
+
+export const save = async (req, res) => {
+    try {
+        let data = req.body;
+        
+        const requiredFields = ['SKU', 'nombre', 'stock', 'marca', 'modelo', 'categoria', 'ubicacion']; 
+                
+        for (let field of requiredFields) {
+            if (!data[field]) {
+                return res.status(400).send({ message: `El campo ${field} es obligatorio` });
+            }
+        }
+        
+        let existingHerramienta = await Herramienta.findOne({ SKU: data.SKU });
+        if (existingHerramienta) {
+            return res.status(400).send({ message: 'El SKU ya está en uso, por favor elija otro' });
+        }
+
+        let categoria = await Categoria.findOne({ _id: data.categoria });
+        if (!categoria) return res.status(404).send({ message: 'Categoría no encontrada' });
+
+        let ubicacion = await Ubicacion.findOne({ _id: data.ubicacion });
+        if (!ubicacion) return res.status(404).send({ message: 'Ubicación no encontrada' });
+
+        console.log(`Capacidad actual: ${ubicacion.capacidad}`);
+        console.log(`Stock a agregar: ${data.stock}`);
+        
+        if (data.stock > ubicacion.capacidad) {
+            return res.status(400).send({ message: `La ubicación solo tiene espacio para almacenar ${ubicacion.capacidad} herramientas` });
+        }
+        
+        let nuevaCapacidad = ubicacion.capacidad - data.stock;
+        
+        let updatedUbicacion = await Ubicacion.findOneAndUpdate(
+            { _id: data.ubicacion },
+            { capacidad: nuevaCapacidad },
+            { new: true } 
+        );
+        
+        console.log(`Capacidad actualizada: ${updatedUbicacion.capacidad}`);
+
+        if (!updatedUbicacion) return res.status(500).send({ message: 'Error al actualizar la capacidad de la ubicación' });
+             
+        let herramienta = new Herramienta(data);
+        await herramienta.save();
+
+        return res.send({ message: 'Herramienta agregada exitosamente' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Error al agregar herramienta' });
+    }
+}
+
+
+
+
+export const get=async(req,res)=>{
+    try {
+        let herramientas=await Herramienta.find()
+        .populate('ubicacion', ['ubicacion'])
+        .populate('categoria', ['categoria'])
+        if(herramientas.length==0) return res.status(404).send({message: 'No hay herramientas que mostrar'})
+        return res.send({herramientas})
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send({message: 'Error al mostrar las herramientas'})
+    }
+}
+
+export const update=async(req,res)=>{
+    try {
+        let {id}=req.params
+        let data=req.body
+        
+        let updatedHerramienta=await Herramienta.findOneAndUpdate(
+            {_id: id},
+            data,
+            {new: true}
+        )
+        .populate('ubicacion', ['ubicacion'])
+        .populate('categoria', ['categoria'])
+        if(!updatedHerramienta) return res.status(404).send({message: 'Herramienta no encontrada y/o no actualizada'})
+        return res.send({message: 'Herramienta actualzada exitosamente', updatedHerramienta})
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send({message: 'Error al actualizar herramienta'})
+    }
+}
+
+export const deleteHerramienta = async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const herramienta = await Herramienta.findById(id).populate('ubicacion');
+        if (!herramienta) {
+            return res.status(404).send({ message: 'Herramienta no encontrada' });
+        }
+
+        const stock = herramienta.stock;
+        const ubicacionId = herramienta.ubicacion._id;
+
+        await Ubicacion.findByIdAndUpdate(
+            ubicacionId,
+            { $inc: { capacidad: stock } }, 
+            { new: true }
+        );
+        
+        await Herramienta.deleteOne({ _id: id });
+
+        return res.send({ message: 'Herramienta eliminada exitosamente' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Error al eliminar la herramienta' });
+    }
+}
+
+export const search=async(req,res)=>{
+    try {
+        let {search}=req.body
+        let herramientas = await Herramienta.find({
+            nombre: { $regex: search, $options: 'i' }
+        })
+        .populate('ubicacion', ['ubicacion'])
+        .populate('categoria', ['categoria'])
+
+        if(herramientas.length==0) return res.status(404).send({message: 'No hay herramientas que mostrar'})
+        return res.send({message: 'Herramientas encontradas', herramientas})
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send({message: 'Error al buscar herramienta'})
+    }
+}
