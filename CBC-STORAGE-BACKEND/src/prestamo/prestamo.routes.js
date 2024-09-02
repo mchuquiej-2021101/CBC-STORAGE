@@ -6,7 +6,7 @@ const api=Router()
 
 api.post('/agregarPrestamo',save)
 api.get('/mostrarPrestamos',get)
-api.put('/actualizarPrestamo',update)
-api.delete('/eliminarPrestamo',deletePrestamo)
+api.put('/actualizarPrestamo/:id',update)
+api.delete('/eliminarPrestamo/:id',deletePrestamo)
 
 export default api

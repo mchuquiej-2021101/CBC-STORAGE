@@ -382,6 +382,77 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "prestamo",
+			"item": [
+				{
+					"name": "Agregar Préstamo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "herramienta",
+									"value": "66d20c40399d62c69bd09318",
+									"type": "text"
+								},
+								{
+									"key": "cantidadHerramientas",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "empleado",
+									"value": "66cf485c2380a3bb2c48823c",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/agregarPrestamo"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Préstamos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:2880/mostrarPrestamos"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Préstamo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "estado",
+									"value": "DEVUELTO",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/actualizarPrestamo/66d5cdf392935f7bec593ef0"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Préstamo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:2880/eliminarPrestamo/66d5e00061a7340cf58fc8e8"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
