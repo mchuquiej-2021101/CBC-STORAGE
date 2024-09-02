@@ -1,6 +1,7 @@
 'use strict'
 
 import Ubicacion from './ubicacion.model.js'
+import Herramienta from '../herramienta/herramienta.model.js'
 
 export const save=async(req, res)=>{
     try {
@@ -73,6 +74,14 @@ export const update=async(req,res)=>{
 export const deleteUbicacion=async(req,res)=>{
     try {
         let {id}=req.params
+
+        let defaultLocation = await Ubicacion.findOne({ ubicacion: 'Default Location' });
+         if (!defaultLocation) {
+            defaultLocation = await Ubicacion.create({ ubicacion: 'Default Location', capacidad: 0});
+         }
+
+         await Herramienta.updateMany({ ubicacion: id }, { $set: { ubicacion: defaultLocation._id } });
+
         let deletedUbicacion=await Ubicacion.deleteOne({_id: id})
         if(deletedUbicacion.deleteCount==0) return res.status(404).send({message: 'Ubicación no encontrada y no eliminada'})
         return res.send({message: 'Ubicación eliminada exitosamente'})            

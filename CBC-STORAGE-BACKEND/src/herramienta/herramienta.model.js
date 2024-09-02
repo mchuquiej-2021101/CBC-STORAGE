@@ -27,12 +27,14 @@ const herramientaSchema=mongoose.Schema({
     categoria:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'categoria',
-        required: true
+        required: true,
+        default: 'Default'
     },
     ubicacion:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ubicacion',
-        required: true
+        required: true,
+        default: 'Default'
     }
 })
 

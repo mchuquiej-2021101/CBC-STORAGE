@@ -1,6 +1,7 @@
 'use strict'
 
 import Empleado from './empleado.model.js'
+import Prestamo from '../prestamo/prestamo.model.js'
 
 export const save = async (req, res) => {
     try {
@@ -83,6 +84,13 @@ export const update=async(req,res)=>{
 export const deleteEmpleado = async (req, res) => {
     try {
         let { id } = req.params;
+
+        let defaultEmployee = await Empleado.findOne({ nombres: 'Default Employee' });
+         if (!defaultEmployee) {
+            defaultEmployee = await Empleado.create({ nombres: 'Default Employee', apellidos: "Default", email: "Default", telefono: "Default "});
+         }
+
+         await Prestamo.updateMany({ empleado: id }, { $set: { empleado: defaultEmployee._id } });
                 
         let deletedEmpleado = await Empleado.deleteOne({ _id: id });
                 

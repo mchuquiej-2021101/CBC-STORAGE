@@ -1,6 +1,7 @@
 import Herramienta from '../herramienta/herramienta.model.js';
 import Categoria from '../categoria/categoria.model.js';
 import Ubicacion from '../ubicacion/ubicacion.model.js';
+import Prestamo from '../prestamo/prestamo.model.js'
 
 export const save = async (req, res) => {
     try {
@@ -93,6 +94,23 @@ export const update=async(req,res)=>{
 export const deleteHerramienta = async (req, res) => {
     try {
         const { id } = req.params;
+
+        let defaultCategory = await Categoria.findOne({ categoria: 'Default Category' });
+         if (!defaultCategory) {
+             defaultCategory = await Categoria.create({ categoria: 'Default Category'});
+         }
+
+         let defaultLocation = await Ubicacion.findOne({ ubicacion: 'Default Location' });
+         if (!defaultLocation) {
+            defaultLocation = await Ubicacion.create({ ubicacion: 'Default Location', capacidad: 0});
+         }
+
+        let defaultTool = await Herramienta.findOne({ nombre: 'Default Tool' });
+         if (!defaultTool) {
+            defaultTool = await Herramienta.create({ nombre: 'Default Tool', SKU: "Default", stock: 0, marca: "Default", modelo: "Default", categoria: defaultCategory._id, ubicacion: defaultLocation._id});
+         }
+
+         await Prestamo.updateMany({ herramienta: id }, { $set: { herramienta: defaultTool._id } });
         
         const herramienta = await Herramienta.findById(id).populate('ubicacion');
         if (!herramienta) {

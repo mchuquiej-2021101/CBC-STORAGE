@@ -1,5 +1,6 @@
 'use strict'
 import Categoria from './categoria.model.js'
+import Herramienta from '../herramienta/herramienta.model.js'
 
 export const save= async(req,res)=>{
     try {
@@ -66,6 +67,13 @@ export const update=async(req,res)=>{
 export const deleteCategoria=async(req,res)=>{
     try {
         let {id}=req.params
+         
+         let defaultCategory = await Categoria.findOne({ categoria: 'Default Category' });
+         if (!defaultCategory) {
+             defaultCategory = await Categoria.create({ categoria: 'Default Category'});
+         }
+
+         await Herramienta.updateMany({ categoria: id }, { $set: { categoria: defaultCategory._id } });
 
         let deletedCategoria=await Categoria.deleteOne({_id: id})
 
