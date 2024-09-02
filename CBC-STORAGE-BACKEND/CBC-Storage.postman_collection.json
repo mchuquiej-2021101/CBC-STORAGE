@@ -12,6 +12,12 @@
 				{
 					"name": "Agregar Empleado",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -49,6 +55,12 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -62,6 +74,12 @@
 				{
 					"name": "Actualizar Empleado",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -81,6 +99,12 @@
 				{
 					"name": "Eliminar Empleado",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "http://localhost:2880/eliminarEmpleado/66cf47da2380a3bb2c488233"
@@ -90,6 +114,12 @@
 				{
 					"name": "Buscar Empleado",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -114,6 +144,12 @@
 				{
 					"name": "Agregar Categoría",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -121,7 +157,7 @@
 							"urlencoded": [
 								{
 									"key": "categoria",
-									"value": "Eléctricos",
+									"value": "No Eléctricos",
 									"type": "text"
 								}
 							]
@@ -133,6 +169,12 @@
 				{
 					"name": "Mostrar Categorías",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:2880/mostrarCategorias"
@@ -142,6 +184,12 @@
 				{
 					"name": "Actualizar Categoría",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -161,6 +209,12 @@
 				{
 					"name": "Eliminar Categoría",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "http://localhost:2880/eliminarCategoria/66cf5c4f4de6a2a4f2a1c74f"
@@ -170,6 +224,12 @@
 				{
 					"name": "Buscar Categoría",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -194,6 +254,12 @@
 				{
 					"name": "Agregar Ubicación",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -218,6 +284,12 @@
 				{
 					"name": "Mostrar Ubicaciones",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:2880/mostrarUbicaciones"
@@ -227,6 +299,12 @@
 				{
 					"name": "Actualizar Ubicacion",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -246,6 +324,12 @@
 				{
 					"name": "Eliminar Ubicación",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "http://localhost:2880/eliminarUbicacion/66d0d4e1c41a747603f5ab7f"
@@ -255,6 +339,12 @@
 				{
 					"name": "Buscar Ubicación",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -279,6 +369,12 @@
 				{
 					"name": "Agregar Herramienta",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -328,6 +424,12 @@
 				{
 					"name": "Mostrar Herramientas",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:2880/mostrarHerramientas"
@@ -337,6 +439,12 @@
 				{
 					"name": "Actualizar Herramienta",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -356,6 +464,12 @@
 				{
 					"name": "Eliminar Ubicación",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "http://localhost:2880/eliminarHerramienta/66d1f07b005c2ba8bad52e82"
@@ -365,6 +479,12 @@
 				{
 					"name": "Buscar Herramienta",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -389,6 +509,12 @@
 				{
 					"name": "Agregar Préstamo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -418,6 +544,12 @@
 				{
 					"name": "Mostrar Préstamos",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:2880/mostrarPrestamos"
@@ -427,6 +559,12 @@
 				{
 					"name": "Actualizar Préstamo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -446,6 +584,12 @@
 				{
 					"name": "Eliminar Préstamo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MjI0NWFiM2ViZTA3MTg4ZWFkNzgiLCJ1c3VhcmlvIjoibHVpcyIsIm5vbWJyZXMiOiJsdWlzIiwiYXBlbGxpZG9zIjoiQWd1aWxhciIsImlhdCI6MTcyNTMwOTUzMSwiZXhwIjoxNzI1MzIwMzMxfQ.UhCcI_vcFy4WjjjAihM9XLsG7JDuLASzpb6SHj7CvS0"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "http://localhost:2880/eliminarPrestamo/66d5e00061a7340cf58fc8e8"
@@ -455,7 +599,7 @@
 			]
 		},
 		{
-			"name": "Admin",
+			"name": "admin",
 			"item": [
 				{
 					"name": "Registrarse",
@@ -511,7 +655,7 @@
 							"urlencoded": [
 								{
 									"key": "usuario",
-									"value": "maldonado",
+									"value": "luis",
 									"type": "text"
 								},
 								{
