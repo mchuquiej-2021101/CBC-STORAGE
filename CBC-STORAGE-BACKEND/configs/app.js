@@ -9,6 +9,7 @@ import categoriaRoutes from '../src/categoria/categoria.routes.js'
 import ubicacionRoutes from '../src/ubicacion/ubicacion.routes.js'
 import herramientaRoutes from '../src/herramienta/herramienta.routes.js'
 import prestamoRoutes from '../src/prestamo/prestamo.routes.js'
+import adminRoutes from '../src/admin/admin.routes.js'
 
 //Configuraciones
 const app = express() //Crear el servidor
@@ -28,6 +29,7 @@ app.use(categoriaRoutes)
 app.use(ubicacionRoutes)
 app.use(herramientaRoutes)
 app.use(prestamoRoutes)
+app.use(adminRoutes)
 
 //Levantar el servidor
 export const initServer = () => {

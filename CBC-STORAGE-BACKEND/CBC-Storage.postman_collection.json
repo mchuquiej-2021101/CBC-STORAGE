@@ -453,6 +453,148 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Registrarse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombres",
+									"value": "luis",
+									"type": "text"
+								},
+								{
+									"key": "apellidos",
+									"value": "Aguilar",
+									"type": "text"
+								},
+								{
+									"key": "usuario",
+									"value": "luis",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "luis@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "contrasena",
+									"value": "dsa4&fdS",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "41256980",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/registrar"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "usuario",
+									"value": "maldonado",
+									"type": "text"
+								},
+								{
+									"key": "contrasena",
+									"value": "dsa4&fdS",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MDFlOTVhNTAxMjk1NDkyNWQyYjkiLCJ1c3VhcmlvIjoibWFsZG9uYWRvIiwibm9tYnJlcyI6Ik1hbGRvbnkiLCJhcGVsbGlkb3MiOiJBZ3VpbGFyIiwiaWF0IjoxNzI1MzA2NDAyLCJleHAiOjE3MjUzMTcyMDJ9.DKhHEm4Fy1pPFNMNVNI5RIoEYiGaselcJx8qxjNjcy0"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "search",
+									"value": "Maldony",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/buscarAdmin"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Mi Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MDFlOTVhNTAxMjk1NDkyNWQyYjkiLCJ1c3VhcmlvIjoibWFsZG9uYWRvIiwibm9tYnJlcyI6Ik1hbGRvbnkiLCJhcGVsbGlkb3MiOiJBZ3VpbGFyIiwiaWF0IjoxNzI1MzA2NDAyLCJleHAiOjE3MjUzMTcyMDJ9.DKhHEm4Fy1pPFNMNVNI5RIoEYiGaselcJx8qxjNjcy0"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "contrasena",
+									"value": "Jam3sfd$",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:2880/actualizarMiPerfil/66d601e95a5012954925d2b9"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Mi Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NmQ2MDFlOTVhNTAxMjk1NDkyNWQyYjkiLCJ1c3VhcmlvIjoibWFsZG9uYWRvIiwibm9tYnJlcyI6Ik1hbGRvbnkiLCJhcGVsbGlkb3MiOiJBZ3VpbGFyIiwiaWF0IjoxNzI1MzA2NDAyLCJleHAiOjE3MjUzMTcyMDJ9.DKhHEm4Fy1pPFNMNVNI5RIoEYiGaselcJx8qxjNjcy0"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:2880/eliminarMiPerfil/66d601e95a5012954925d2b9"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
