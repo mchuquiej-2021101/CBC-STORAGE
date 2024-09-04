@@ -97,3 +97,50 @@ export const deleteUbicacionRequest=async(ubicacionId)=>{
         }
     }
 }
+
+//CATEGORIA
+export const addCategoriaRequest=async(categoria)=>{
+    try {
+        return await apiClient.post('/agregarCategoria', categoria)
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const getCategoriaRequest=async()=>{
+    try {
+        const response=await apiClient.get('/mostrarCategorias')
+        console.log(response)
+        return response.data.categorias
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const updateCategoriaRequest=async(categoriaId, updatedCategoria)=>{
+    try {
+        return await apiClient.put(`/actualizarCategoria/${categoriaId}`, updatedCategoria)
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const deleteCategoriaRequest=async(categoriaId)=>{
+    try {
+        return await apiClient.delete(`/eliminarCategoria/${categoriaId}`)
+    } catch (error) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
