@@ -51,3 +51,49 @@ export const deleteEmpleadoRequest=async(empleadoId)=>{
         }
     }
 }
+
+//UBICACION
+export const addUbicacionRequest=async(ubicacion)=>{
+    try {
+        return await apiClient.post('/agregarUbicacion', ubicacion)
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const getUbicacionesRequest=async()=>{
+    try {
+        const response=await apiClient.get('/mostrarUbicaciones')
+        return response.data.ubicaciones
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const updateUbicacionRequest=async(ubicacionId, updatedUbicacion)=>{
+    try {
+        return await apiClient.put(`/actualizarUbicacion/${ubicacionId}`, updatedUbicacion)
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const deleteUbicacionRequest=async(ubicacionId)=>{
+    try {
+        return await apiClient.delete(`/eliminarUbicacion/${ubicacionId}`)
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}

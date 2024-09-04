@@ -3,14 +3,22 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { EmpleadoPage } from './pages/EmpleadoPage'
+import { UbicacionPage } from './pages/UbicacionPage'
 import { Toaster } from 'react-hot-toast'
+import { Route, Routes } from 'react-router-dom'
+
 
 function App() {
     return (
-    <>
-      <EmpleadoPage/>
+    <div>
+      
+      <Routes>
+        <Route path='/empleado' element={<EmpleadoPage/>}/>
+        <Route path='/ubicacion' element={<UbicacionPage/>}/>
+      </Routes>
       <Toaster position='bottom-right' reverseOrder={false}/>
-    </>
+    
+    </div>
   )
 }
 

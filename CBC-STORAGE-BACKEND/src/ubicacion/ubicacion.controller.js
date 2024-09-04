@@ -43,33 +43,45 @@ export const get=async(req,res)=>{
     }
 }
 
-export const update=async(req,res)=>{
+export const update = async (req, res) => {
     try {
-        let {id}=req.params
-        let data=req.body
-
-        let ubicacionEncontrada=await Ubicacion.find({
-            ubicacion: data.ubicacion
-        })
-
-        if(ubicacionEncontrada.length>0){
-            return res.status(400).send({message: 'La ubicación ya existe'})
+        const { id } = req.params;
+        const data = req.body;
+        
+        if (!id || !data) {
+            return res.status(400).send({ message: 'ID y datos son requeridos' });
         }
 
-        let updatedUbicacion=await Ubicacion.findOneAndUpdate(
-            {_id: id},
-            data,
-            {new: true}
-        )
+        const ubicacionActual = await Ubicacion.findById(id);
+        if (!ubicacionActual) {
+            return res.status(404).send({ message: 'Ubicación no encontrada' });
+        }
 
-        if(!updatedUbicacion) return res.status(404).send({message: 'Ubicación no encontrada y no actualizada'})
-        return res.send({message: 'Ubicación actualizada exitosamente', updatedUbicacion})
+        if (data.ubicacion && data.ubicacion !== ubicacionActual.ubicacion) {
+            const ubicacionEncontrada = await Ubicacion.findOne({ ubicacion: data.ubicacion });
+            if (ubicacionEncontrada) {
+                return res.status(400).send({ message: 'La ubicación ya existe' });
+            }
+        }
+
+        const updatedUbicacion = await Ubicacion.findByIdAndUpdate(
+            id,
+            { $set: data },  
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedUbicacion) {
+            return res.status(404).send({ message: 'Ubicación no encontrada y no actualizada' });
+        }
+
+        return res.send({ message: 'Ubicación actualizada exitosamente', updatedUbicacion });
 
     } catch (error) {
-        console.error(error)
-        return res.status(500).send({message: 'Error al actualizar ubicación'})
+        console.error('Error en la actualización de ubicación:', error);
+        return res.status(500).send({ message: 'Error al actualizar ubicación', error });
     }
-}
+};
+
 
 export const deleteUbicacion=async(req,res)=>{
     try {
