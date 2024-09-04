@@ -4,7 +4,7 @@ import { addEmpleadoRequest, getEmpleadosRequest, updateEmpleadoRequest, deleteE
 
 export const useEmpleado=()=>{
     const [isLoading, setIsLoading]=useState(false)
-    const [empleados, setEmpleados]=useState()
+    const [empleados, setEmpleados]=useState([])
 
     const addEmpleado=async(nombres, apellidos, email, telefono)=>{
         setIsLoading(true)

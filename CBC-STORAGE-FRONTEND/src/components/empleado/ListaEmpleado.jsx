@@ -93,12 +93,14 @@ export const TodoListFormEmpleado = () => {
         e.preventDefault()
         try {
             if (editingEmpleadoId) {
+                console.log("editar 1")
                 await updateEmpleado(editingEmpleadoId, {
                     nombres: formData.nombres.value,
                     apellidos: formData.apellidos.value,
                     email: formData.email.value,
                     telefono: formData.telefono.value
                 })
+                console.log("editar 2")
                 toast.success('Empleado actualizado exitosamente')
             } else {
                 await addEmpleado(

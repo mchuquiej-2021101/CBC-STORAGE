@@ -49,37 +49,51 @@ export const get= async(req,res)=>{
     }
 }
 
-export const update=async(req,res)=>{
+export const update = async (req, res) => {
     try {
-        let {id}=req.params
-        let data=req.body
+        const { id } = req.params;
+        const data = req.body;
+        
+        if (!id || !data) {
+            return res.status(400).send({ message: 'ID y datos son requeridos' });
+        }
+        
+        const empleadoActual = await Empleado.findById(id);
+        if (!empleadoActual) {
+            return res.status(404).send({ message: 'Empleado no encontrado' });
+        }
+        
+        if (data.telefono && data.telefono !== empleadoActual.telefono) {
+            const telefonoEncontrado = await Empleado.findOne({ telefono: data.telefono });
+            if (telefonoEncontrado) {
+                return res.status(400).send({ message: 'El número de teléfono ya está asignado a otra persona' });
+            }
+        }
+        
+        if (data.email && data.email !== empleadoActual.email) {
+            const emailEncontrado = await Empleado.findOne({ email: data.email });
+            if (emailEncontrado) {
+                return res.status(400).send({ message: 'El email ya está asignado a otra persona' });
+            }
+        }
+        
+        const updatedEmpleado = await Empleado.findByIdAndUpdate(
+            id,
+            { $set: data },  
+            { new: true, runValidators: true }
+        );
 
-        //Validación para que el teléfono sea diferente
-        let telefonoEncontrado = await Empleado.find({ telefono: data.telefono });
-        if (telefonoEncontrado.length > 0) {
-            return res.status(400).send({ message: 'El número de teléfono ya está asignado a otra persona' });
+        if (!updatedEmpleado) {
+            return res.status(404).send({ message: 'Empleado no encontrado y no actualizado' });
         }
 
-        //Validación para que el email sea diferente
-        let emailEncontrado=await Empleado.find({email: data.email})
-        if(emailEncontrado.length>0){
-            return res.status(400).send({message: 'El email ya está asignado a otra persona'})
-        }
-
-        let updatedEmpleado=await Empleado.findOneAndUpdate(
-            {_id: id},
-            data,
-            {new: true}
-        )
-
-        if(!updatedEmpleado) return res.status(404).send({message: 'Empleado no encontrado y no actualizado'})
-
-        return res.send({message: 'Empleado actualizado exitosamente', updatedEmpleado})
+        return res.send({ message: 'Empleado actualizado exitosamente', updatedEmpleado });
     } catch (error) {
-        console.error(error)
-        return res.status(500).send({message: 'Error al actualizar empleado'})
+        console.error('Error en la actualización de empleado:', error);
+        return res.status(500).send({ message: 'Error al actualizar empleado', error });
     }
-}
+};
+
 
 export const deleteEmpleado = async (req, res) => {
     try {
