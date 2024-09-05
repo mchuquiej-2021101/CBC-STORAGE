@@ -144,3 +144,50 @@ export const deleteCategoriaRequest=async(categoriaId)=>{
         }
     }
 }
+
+//HERRAMIENTA
+export const addHerramientaRequest=async(herramienta)=>{
+    try {
+        return await apiClient.post('/agregarHerramienta', herramienta)
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const getHerramientasRequest=async()=>{
+    try {
+        const response=await apiClient.get('/mostrarHerramientas')
+        return response.data.herramientas
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+
+export const updateHerramientaRequest=async(herramientaId, updatedHerramienta)=>{
+    try {
+        return await apiClient.put(`/actualizarHerramienta/${herramientaId}`, updatedHerramienta)
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+}
+
+export const deleteHerramientaRequest=async(herramientaId)=>{
+    try {
+        return await apiClient.delete(`/eliminarHerramienta/${herramientaId}`)
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}

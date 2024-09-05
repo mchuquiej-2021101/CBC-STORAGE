@@ -5,10 +5,10 @@ import { validateJwt } from '../middlewares/validate-jwt.js'
 
 const api=Router()
 
-api.post('/agregarHerramienta',[validateJwt], save)
-api.get('/mostrarHerramientas',[validateJwt], get)
-api.put('/actualizarHerramienta/:id',[validateJwt], update)
-api.delete('/eliminarHerramienta/:id',[validateJwt], deleteHerramienta)
-api.post('/buscarHerramienta',[validateJwt], search)
+api.post('/agregarHerramienta',/*[validateJwt],*/ save)
+api.get('/mostrarHerramientas',/*[validateJwt],*/ get)
+api.put('/actualizarHerramienta/:id',/*[validateJwt],*/ update)
+api.delete('/eliminarHerramienta/:id',/*[validateJwt],*/ deleteHerramienta)
+api.post('/buscarHerramienta',/*[validateJwt],*/ search)
 
 export default api

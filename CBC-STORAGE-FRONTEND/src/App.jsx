@@ -5,6 +5,7 @@ import './App.css'
 import { EmpleadoPage } from './pages/EmpleadoPage'
 import { UbicacionPage } from './pages/UbicacionPage'
 import { CategoriaPage } from './pages/CategoriaPage'
+import { HerramientaPage } from './pages/HerramientaPage'
 import { Toaster } from 'react-hot-toast'
 import { Route, Routes } from 'react-router-dom'
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/empleado' element={<EmpleadoPage/>}/>
         <Route path='/ubicacion' element={<UbicacionPage/>}/>
         <Route path='/categoria' element={<CategoriaPage/>}/>
+        <Route path='/herramienta' element={<HerramientaPage/>}/>
       </Routes>
       <Toaster position='bottom-right' reverseOrder={false}/>
     
