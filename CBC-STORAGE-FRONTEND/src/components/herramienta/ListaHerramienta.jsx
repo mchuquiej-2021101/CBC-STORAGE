@@ -1,14 +1,14 @@
-import { useState } from "react";
-import {Input} from '../Input'
+import { useState, useEffect } from "react";
+import { Input } from '../Input'
 import ComboBox from "../ComboBox";
 import { useHerramienta } from "../../shared/hooks/useHerramienta.jsx";
-import{
+import {
     skuHerramientaValidationMessage,
     validateSku,
     nombreHerramientaValidationMessage,
     validateNombre,
     stockHerramientaValidationMessage,
-    validateStok,
+    validateStock,
     marcaHerramientaValidationMessage,
     validateMarca,
     modeloHerramientaValidationMessage,
@@ -19,52 +19,63 @@ import{
     validateUbicacion
 } from '../../shared/validators/validatorHerramienta.js'
 import toast from "react-hot-toast";
+import { useCategoria } from "../../shared/hooks/useCategoria.jsx";
+import { useUbicacion } from '../../shared/hooks/useUbicacion.jsx'
 
-export const TodoListFormHerramienta=()=>{
-    const {addHerramienta, getHerramientas, updateHerramienta, deleteHerramienta, isLoading, herramientas}=useHerramienta()
+export const TodoListFormHerramienta = () => {
+    const { addHerramienta, getHerramientas, updateHerramienta, deleteHerramienta, isLoading, herramientas } = useHerramienta()
 
-    const initialFormData={
-        SKU:{
+    //para el cmb
+    const { getCategorias, categorias = [] } = useCategoria();
+    const { getUbicaciones, ubicaciones = [] } = useUbicacion()
+
+    useEffect(() => {
+        getCategorias();
+        getUbicaciones()
+    }, []);
+
+    const initialFormData = {
+        SKU: {
             value: "",
             isValid: false,
             showError: false
         },
-        nombre:{
+        nombre: {
             value: "",
             isValid: false,
             showError: false
         },
-        stock:{
+        stock: {
             value: "",
             isValid: false,
             showError: false
         },
-        marca:{
+        marca: {
             value: "",
             isValid: false,
             showError: false
         },
-        modelo:{
+        modelo: {
             value: "",
             isValid: false,
             showError: false
         },
-        categoria:{
+        categoria: {
             value: "",
             isValid: false,
             showError: false
         },
-        ubicacion:{
+        ubicacion: {
             value: "",
             isValid: false,
             showError: false
         }
     }
 
-    const [formData, setFormData]=useState(initialFormData)
-    const [editingHerramientaId, setEditingHerramientaId]=useState(null)
+    const [formData, setFormData] = useState(initialFormData)
+    const [editingHerramientaId, setEditingHerramientaId] = useState(null)
 
-    const fetchHerramientas=async()=>{
+    const fetchHerramientas = async () => {
         try {
             await getHerramientas()
         } catch (error) {
@@ -72,58 +83,69 @@ export const TodoListFormHerramienta=()=>{
         }
     }
 
-    const handleValueChange=(value, field)=>{
-        setFormData(prevData =>({
-            ...prevData,
-            [field] :{
-                ...prevData[field],
-                value
-            }
-        }))
-    }
+    const handleValueChange = (value, field) => {
+        let isValid = false;
 
-    const handleValidationOnBlur=(value, field)=>{
-        let isValid=false
-        switch(field){
-            case "SKU":
-                isValid=validateSku(value)
-                break
-            case "nombre":
-                isValid=validateNombre(value)
-                break
-            case "stock":
-                isValid=validateSku(value)
-                break
-            case "marca":
-                isValid=validateMarca(value)
-                break
-            case "modelo":
-                isValid=validateModelo(value)
-                break
-            case "categoria":
-                isValid=validateCategoria(value)
-                break
-            case "ubicacion":
-                isValid=validateUbicacion(value)
-            default: 
-                break
+        if (field === "categoria" || field === "ubicacion") {
+            isValid = value !== ""; // Si se selecciona algo, será válido.
         }
-        setFormData(prevData=>({
+
+        setFormData(prevData => ({
             ...prevData,
-            [field]:{
+            [field]: {
+                ...prevData[field],
+                value,
+                isValid: field === "categoria" || field === "ubicacion" ? isValid : prevData[field].isValid, // Solo actualizar isValid si es categoría o ubicación.
+            }
+        }));
+    };
+
+
+    const handleValidationOnBlur = (value, field) => {
+        let isValid = false;
+        switch (field) {
+            case "SKU":
+                isValid = validateSku(value);
+                break;
+            case "nombre":
+                isValid = validateNombre(value);
+                break;
+            case "stock":
+                isValid = validateStock(value);
+                break;
+            case "marca":
+                isValid = validateMarca(value);
+                break;
+            case "modelo":
+                isValid = validateModelo(value);
+                break;
+            case "categoria":
+                isValid = value !== "";  // Validar si una opción está seleccionada
+                break;
+            case "ubicacion":
+                isValid = value !== "";  // Validar si una opción está seleccionada
+                break;
+            default:
+                break;
+        }
+    
+        setFormData(prevData => ({
+            ...prevData,
+            [field]: {
                 ...prevData[field],
                 value,
                 isValid,
                 showError: !isValid
             }
-        }))
-    }
+        }));
+    };
+    
 
-    const handleAddHerramienta=async(e)=>{
-        e.prventDefault()
+    const handleAddHerramienta = async (e) => {
+        e.preventDefault()
         try {
-            if(editingHerramientaId){
-                await updateHerramienta(editingHerramientaId,{
+            if (editingHerramientaId) {
+                await updateHerramienta(editingHerramientaId, {
                     SKU: formData.SKU.value,
                     nombre: formData.nombre.value,
                     stock: formData.stock.value,
@@ -133,7 +155,7 @@ export const TodoListFormHerramienta=()=>{
                     ubicacion: formData.ubicacion.value
                 })
                 toast.success('Herramienta actualizada exitosamente')
-            }else{
+            } else {
                 await addHerramienta(
                     formData.SKU.value,
                     formData.nombre.value,
@@ -149,47 +171,47 @@ export const TodoListFormHerramienta=()=>{
             setEditingHerramientaId(null)
             fetchHerramientas()
         } catch (error) {
-            console.error('Error al agregar/actualizar herramienta')
+            console.error('Error al agregar/actualizar herramienta', error)
             toast.error('Error al agregar/actualizar herramienta')
         }
     }
 
-    const handleEditHerramienta=(herramientaId)=>{
-        const herramientaToEdit=herramientas.find(herramienta => herramienta._id===herramientaId)
-        if(herramientaToEdit){
+    const handleEditHerramienta = (herramientaId) => {
+        const herramientaToEdit = herramientas.find(herramienta => herramienta._id === herramientaId)
+        if (herramientaToEdit) {
             setFormData({
-                SKU:{
+                SKU: {
                     value: herramientaToEdit.SKU,
                     isValid: true,
                     showError: false
                 },
-                nombre:{
+                nombre: {
                     value: herramientaToEdit.nombre,
                     isValid: true,
                     showError: false
                 },
-                stock:{
+                stock: {
                     value: herramientaToEdit.stock,
                     isValid: true,
                     showError: false
                 },
-                marca:{
+                marca: {
                     value: herramientaToEdit.marca,
                     isValid: true,
                     showError: false
                 },
-                modelo:{
+                modelo: {
                     value: herramientaToEdit.modelo,
                     isValid: true,
                     showError: false
                 },
-                categoria:{
-                    value: herramientaToEdit.categoria,
+                categoria: {
+                    value: herramientaToEdit.categoria._id, // Asegúrate de que este valor es igual a un _id en categorias
                     isValid: true,
                     showError: false
                 },
-                ubicacion:{
-                    value: herramientaToEdit.ubicacion,
+                ubicacion: {
+                    value: herramientaToEdit.ubicacion._id, // Asegúrate de que este valor es igual a un _id en ubicaciones
                     isValid: true,
                     showError: false
                 }
@@ -198,8 +220,8 @@ export const TodoListFormHerramienta=()=>{
         }
     }
 
-    const handleDeleteHerramienta=async(herramientaId)=>{
-        if(window.confirm('¿Estás seguro de eliminar esta herramienta?')){
+    const handleDeleteHerramienta = async (herramientaId) => {
+        if (window.confirm('¿Estás seguro de eliminar esta herramienta?')) {
             try {
                 await deleteHerramienta(herramientaId)
                 toast.success('Herramienta eliminada exitosamente')
@@ -211,7 +233,7 @@ export const TodoListFormHerramienta=()=>{
         }
     }
 
-    const cancel=()=>{
+    const cancel = () => {
         setFormData(initialFormData)
     }
 
@@ -220,13 +242,13 @@ export const TodoListFormHerramienta=()=>{
         !formData.nombre.isValid ||
         !formData.stock.isValid ||
         !formData.marca.isValid ||
-        !formData.modelo.isValid || 
+        !formData.modelo.isValid ||
         !formData.categoria.isValid ||
         !formData.ubicacion.isValid
 
-    return(
+    return (
         <div>
-            <form onSubmit={handleAddHerramienta}> 
+            <form onSubmit={handleAddHerramienta}>
                 <Input
                     field="SKU"
                     label="SKU"
@@ -266,7 +288,7 @@ export const TodoListFormHerramienta=()=>{
                     onBlurHandler={handleValidationOnBlur}
                     showErrorMessage={formData.marca.showError}
                     validationMessage={marcaHerramientaValidationMessage}
-                /> 
+                />
                 <Input
                     field="modelo"
                     label="Modelo"
@@ -278,7 +300,36 @@ export const TodoListFormHerramienta=()=>{
                     validationMessage={modeloHerramientaValidationMessage}
                 />
 
-                {/* faltan comboBox */}
+                <div>
+                <select
+                    value={formData.categoria.value}
+                    onChange={(e) => handleValueChange(e.target.value, 'categoria')}
+                    onBlur={() => handleValidationOnBlur(formData.categoria.value, 'categoria')} // Validación al perder el foco
+                    required
+                >
+                    <option value="">Seleccione la Categoría</option>
+                    {categorias.map((categoria) => (
+                        <option key={categoria._id} value={categoria._id}>{categoria.categoria}</option>
+                    ))}
+                </select>
+                </div>
+
+                <div>
+                <select
+                    value={formData.ubicacion.value}
+                    onChange={(e) => handleValueChange(e.target.value, 'ubicacion')}
+                    onBlur={() => handleValidationOnBlur(formData.ubicacion.value, 'ubicacion')}
+                    required
+                >
+                    <option value="">Seleccione la Ubicación</option>
+                    {ubicaciones.map((ubicacion) => (
+                        <option key={ubicacion._id} value={ubicacion._id}>{ubicacion.ubicacion}</option>
+                    ))}
+                </select>
+                </div>
+
+
+
                 <div></div>
 
                 <button type="submit" disabled={isSubmitButtonDisabled}>
@@ -287,7 +338,7 @@ export const TodoListFormHerramienta=()=>{
                 <button type="button" onClick={cancel}>
                     Cancelar
                 </button>
-            </form>         
+            </form>
             <div>
                 <h2>Herramientas</h2>
                 <table>
@@ -303,15 +354,15 @@ export const TodoListFormHerramienta=()=>{
                         </tr>
                     </thead>
                     <tbody>
-                        {herramientas && herramientas.length>0 && herramientas.map((herramienta, index)=>{
+                        {herramientas && herramientas.length > 0 && herramientas.map((herramienta, index) => (
                             <tr key={index}>
                                 <td>{herramienta.SKU}</td>
                                 <td>{herramienta.nombre}</td>
                                 <td>{herramienta.stock}</td>
                                 <td>{herramienta.marca}</td>
                                 <td>{herramienta.modelo}</td>
-                                <td>{herramienta.categoria}</td>
-                                <td>{herramienta.ubicacion}</td>
+                                <td>{herramienta.categoria.categoria}</td>
+                                <td>{herramienta.ubicacion.ubicacion}</td>
                                 <td>
                                     <svg onClick={() => handleEditHerramienta(herramienta._id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -322,10 +373,10 @@ export const TodoListFormHerramienta=()=>{
                                     </svg>
                                 </td>
                             </tr>
-                        })}
+                        ))}
                     </tbody>
                 </table>
-            </div>       
+            </div>
         </div>
     )
 }

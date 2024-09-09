@@ -6,7 +6,7 @@ export const useHerramienta=()=>{
     const [isLoading, setIsLoading]=useState(false)
     const [herramientas, setHerramientas]=useState()
 
-    const addHerramienta=async(SKU, nombre, stock, marca, modelo, categoria, ubicacion)=>{
+    const addHerramienta=async(SKU, nombre, stock, marca, modelo, categoria, ubicacion)=>{        
         setIsLoading(true)
         try {
             const herramienta={
@@ -30,6 +30,7 @@ export const useHerramienta=()=>{
 
     const getHerramientas=async()=>{
         const response=await getHerramientasRequest()
+        console.log(response)
         if(response.error){
             response?.error?.data?.message || 'Error al obtener las herramientas'
         }

@@ -8,7 +8,7 @@ export const validateNombre = (nombre) => {
     return regex.test(nombre)
 }
 
-export const validateStok=(stock)=>{
+export const validateStock=(stock)=>{
     const regex = /^\d+$/; //Solo números enteros
     return regex.test(stock)
 }
