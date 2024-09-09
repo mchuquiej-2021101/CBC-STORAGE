@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Input } from '../Input'
-import ComboBox from "../ComboBox";
 import { useHerramienta } from "../../shared/hooks/useHerramienta.jsx";
 import {
     skuHerramientaValidationMessage,
