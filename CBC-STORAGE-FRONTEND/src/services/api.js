@@ -191,3 +191,49 @@ export const deleteHerramientaRequest=async(herramientaId)=>{
         }
     }
 }
+
+//PRÉSTAMO
+export const addPrestamoRequest=async(prestamo)=>{
+    try {
+        return await apiClient.post('/agregarPrestamo', prestamo)
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const getPrestamoRequest=async()=>{
+    try {
+        const response=await apiClient.get('/mostrarPrestamos')
+        return response.data.prestamos
+    } catch (error) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const updatePrestamoRequest=async(prestamoId, updatedPrestamo)=>{
+    try {
+        return await apiClient.put(`/actualizarPrestamo/${prestamoId}`, updatedPrestamo)
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+export const deletePrestamoRequest=async(prestamoId)=>{
+    try {
+        return await apiClient.delete(`/eliminarPrestamo/${prestamoId}`)
+    } catch (error) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
