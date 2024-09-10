@@ -87,9 +87,9 @@ export const update=async(req,res)=>{
         let {id}=req.params
         let data=req.body
 
-        if(data.estado=='DEVUELTO'){
-            data.fechaDevolucion=new Date()
-        }
+        data.estado='DEVUELTO'
+        data.fechaDevolucion=new Date()
+        
 
         let updatedPrestamo=await Prestamo.findOneAndUpdate(
             {_id: id},

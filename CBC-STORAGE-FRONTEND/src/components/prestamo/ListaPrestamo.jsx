@@ -45,11 +45,11 @@ export const TodoListFormPrestamo = () => {
             isValid: false,
             showError: false
         },
-       /*  fechaPrestamo: {
-            value: "",
-            isValid: false,
-            showError: false
-        }, */
+        /*  fechaPrestamo: {
+             value: "",
+             isValid: false,
+             showError: false
+         }, */
         /* fechaDevolucion: {
             value: "",
             isValid: false,
@@ -102,9 +102,9 @@ export const TodoListFormPrestamo = () => {
             case "empleado":
                 isValid = value != ""
                 break
-           /*  case "fechaPrestamo":
-                isValid = validateFechaInicio(value)
-                break */
+            /*  case "fechaPrestamo":
+                 isValid = validateFechaInicio(value)
+                 break */
             /* case "fechaDevolucion":
                 isValid = validateFechaFin(value)
                 break
@@ -125,17 +125,17 @@ export const TodoListFormPrestamo = () => {
     }
 
     const handleAddPrestamo = async (e) => {
-        e.preventDefault()   
+        e.preventDefault()
 
         try {
             if (editingPrestamoId) {
                 await updatePrestamo(editingPrestamoId, {
                     herramienta: formData.herramienta.value,
                     cantidadHerramientas: formData.cantidadHerramientas.value,
-                    empleado: formData.empleado.value,
+                    empleado: formData.empleado.value/* ,
                     fechaPrestamo: formData.fechaPrestamo.value,
                     fechaDevolucion: formData.fechaDevolucion.value,
-                    estado: formData.estado.value
+                    estado: formData.estado.value */
                 })
                 toast.success('Préstamo actualizado correctamente')
             } else {
@@ -153,7 +153,7 @@ export const TodoListFormPrestamo = () => {
             setEditingPrestamoId(null)
             fetchPrestamos()
         } catch (error) {
-            console.error("Error al agregar/actualizar préstamo", error)
+            console.error("Error al agregar/actualizar préstamo", error, "james")
             toast.error('Error al agregar/actualizar préstamo')
         }
     }
@@ -219,8 +219,34 @@ export const TodoListFormPrestamo = () => {
         !formData.cantidadHerramientas.isValid ||
         !formData.empleado.isValid /*|| 
         !formData.fechaPrestamo.isValid || */
-        /* !formData.fechaDevolucion.isValid ||  */
-        /* !formData.estado.isValid */
+    /* !formData.fechaDevolucion.isValid ||  */
+    /* !formData.estado.isValid */
+
+
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses empiezan desde 0
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
+    const estadoStyles = {
+        devuelto: { color: 'green' },
+        noDevuelto: { color: 'red' }
+    };
+    
+    const getEstadoStyle = (estado) => {
+        switch (estado) {
+            case 'DEVUELTO':
+                return estadoStyles.devuelto;
+            case 'NO DEVUELTO':
+                return estadoStyles.noDevuelto;
+            default:
+                return {};
+        }
+    };
 
     return (
         <div>
@@ -315,14 +341,16 @@ export const TodoListFormPrestamo = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {prestamos && prestamos.length>0 && prestamos.map((prestamo, index)=>(
+                        {prestamos && prestamos.length > 0 && prestamos.map((prestamo, index) => (
                             <tr key={index}>
                                 <td>{prestamo.herramienta.nombre}</td>
                                 <td>{prestamo.cantidadHerramientas}</td>
                                 <td>{prestamo.empleado.nombres}</td>
-                                <td>{prestamo.fechaPrestamo}</td>
-                                <td>{prestamo.fechaDevolucion}</td>
-                                <td>{prestamo.estado}</td>
+                                <td>{formatDate(prestamo.fechaPrestamo)}</td>
+                                <td>{formatDate(prestamo.fechaDevolucion)}</td>
+                                <td style={getEstadoStyle(prestamo.estado)}>
+                                {prestamo.estado}                
+                                </td>
                                 <td>
                                     <svg onClick={() => handleEditPrestamo(prestamo._id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
