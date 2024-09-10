@@ -72,11 +72,15 @@ export const get=async(req,res)=>{
         .populate('empleado',['nombres'])
         if(prestamos.length==0) return res.status(404).send({message: 'No hay préstamos que mostrar'})
         return res.send({prestamos})
+
+        
     } catch (error) {
         console.error(error)
         return res.stats(500).send({message: 'Error al obtener préstamos'})
     }
 }
+
+
 
 export const update=async(req,res)=>{
     try {
