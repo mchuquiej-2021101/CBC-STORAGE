@@ -6,6 +6,7 @@ import { PrestamoPage } from './pages/PrestamoPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AuthPage } from './pages/AuthPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage'; 
+import { RegisterPage } from './pages/RegisterPage';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute'; 
@@ -42,6 +43,8 @@ function App() {
             <PrestamoPage />
           </ProtectedRoute>
         } />
+
+        <Route path='/register' element={<RegisterPage />} />
         
         
         <Route path='*' element={<NotFoundPage />} />

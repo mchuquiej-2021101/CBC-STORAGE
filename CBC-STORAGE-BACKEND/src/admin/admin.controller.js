@@ -6,6 +6,7 @@ import { authenticateToken } from '../middlewares/authMiddleware.js'
 
 export const register = async (req, res) => {
     try {
+        console.log(req.body)
         let data = req.body;
         
         const requiredFields = ['nombres', 'apellidos', 'usuario', 'email', 'contrasena', 'telefono'];

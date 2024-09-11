@@ -262,3 +262,15 @@ export const deletePrestamoRequest=async(prestamoId)=>{
         }
     }
 }
+
+//ADMIN
+export const registerAdminRequest=async(admin)=>{
+    try {
+        return await apiClient.post('/registrar', admin)
+    } catch (error) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
