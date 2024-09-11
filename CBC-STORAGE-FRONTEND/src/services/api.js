@@ -5,8 +5,33 @@ const apiClient=axios.create({
     timeout: 5000
 })
 
-//EMPLEADO
+//MIDDLEWARE PARA AGREGAR DATOS COMO HEADERS
+apiClient.interceptors.request.use(
+    config=>{
+        const token=localStorage.getItem('token');
+        if(token) {
+            config.headers.Authorization=token
+        }
+        return config
+    },
+    error=>{
+        return Promise.reject(error)
+    }
+)
 
+//LOGIN
+export const loginRequest=async(user)=>{
+    try {
+        return await apiClient.post('/login', user)
+    } catch (err) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+//EMPLEADO
 export const addEmpleadoRequest=async(empleado)=>{
     try {
         return await apiClient.post('/agregarEmpleado', empleado)
