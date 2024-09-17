@@ -44,7 +44,11 @@ function App() {
           </ProtectedRoute>
         } />
 
-        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/register' element={
+          <ProtectedRoute>
+            <RegisterPage />
+          </ProtectedRoute>          
+          } />
         
         
         <Route path='*' element={<NotFoundPage />} />

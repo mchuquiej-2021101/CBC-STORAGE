@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 
 export const RegisterComponent = () => {
     const { registerAdmin, isLoading } = useAdmin()
+    const [recipientEmail, setRecipientEmail] = useState('');    
 
     const initialFormData = {
         nombres: {
@@ -59,7 +60,7 @@ export const RegisterComponent = () => {
         setFormData(prevData => ({
             ...prevData,
             [field]: {
-                ...prevData[field], // Mantener el estado anterior
+                ...prevData[field], 
                 value
             }
         }))
@@ -108,12 +109,35 @@ export const RegisterComponent = () => {
             await registerAdmin(
                 formData.nombres.value,
                 formData.apellidos.value,
-                formData.email.value,
                 formData.usuario.value,
+                formData.email.value,                
                 formData.contrasena.value,
                 formData.telefono.value
             )
             setFormData(initialFormData)
+
+            //enviar correo
+            const response = await fetch('http://localhost:2880/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    subject: 'Credenciales de acceso CBC-STORAGE', 
+                    to: formData.email.value,
+                    nombres: formData.nombres.value,
+                    apellidos: formData.apellidos.value,
+                    usuario: formData.usuario.value,
+                    contrasena: formData.contrasena.value
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al enviar el correo');
+            }
+
+            const result = await response.json();
+            console.log(result.message);
         } catch (error) {
             console.error('Error al registrar admin')
             toast.error("Error al registrar admin")
