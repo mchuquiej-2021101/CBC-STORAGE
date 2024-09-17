@@ -7,6 +7,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { AuthPage } from './pages/AuthPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage'; 
 import { RegisterPage } from './pages/RegisterPage';
+import { HomePage } from './pages/HomePage';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute'; 
@@ -47,6 +48,12 @@ function App() {
         <Route path='/register' element={
           <ProtectedRoute>
             <RegisterPage />
+          </ProtectedRoute>          
+          } />
+
+        <Route path='/homePage' element={
+          <ProtectedRoute>
+            <HomePage />
           </ProtectedRoute>          
           } />
         
