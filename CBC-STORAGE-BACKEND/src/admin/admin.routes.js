@@ -8,7 +8,7 @@ const api=express.Router()
 
 api.post('/registrar', register)
 api.post('/login', login)
-api.put('/actualizarMiPerfil/:id', [validateJwt], authenticateToken ,update)
+api.put('/actualizarMiPerfil/:id'/* , [validateJwt], */, authenticateToken ,update)
 api.delete('/eliminarMiPerfil/:id', [validateJwt], authenticateToken, deleteAdmin)
 api.post('/buscarAdmin',[validateJwt], search)
 

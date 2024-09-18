@@ -7,17 +7,17 @@ const apiClient=axios.create({
 
 //MIDDLEWARE PARA AGREGAR DATOS COMO HEADERS
 apiClient.interceptors.request.use(
-    config=>{
-        const token=localStorage.getItem('token');
-        if(token) {
-            config.headers.Authorization=token
+    config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`; // Añadir el prefijo 'Bearer'
         }
-        return config
+        return config;
     },
-    error=>{
-        return Promise.reject(error)
+    error => {
+        return Promise.reject(error);
     }
-)
+);
 
 //LOGIN
 export const loginRequest=async(user)=>{
@@ -267,6 +267,19 @@ export const deletePrestamoRequest=async(prestamoId)=>{
 export const registerAdminRequest=async(admin)=>{
     try {
         return await apiClient.post('/registrar', admin)
+    } catch (error) {
+        return{
+            error: true,
+            err
+        }
+    }
+}
+
+//UPDATE PASWORD
+
+export const updatePasswordRequest=async(userId, updatedPassword)=>{
+    try {
+        return await apiClient.put(`/actualizarMiPerfil/${userId}`, updatedPassword)
     } catch (error) {
         return{
             error: true,

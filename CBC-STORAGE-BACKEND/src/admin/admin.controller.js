@@ -55,6 +55,7 @@ export const login = async (req, res) => {
         }
         
         let admin = await Admin.findOne({ usuario });
+        console.log("Id: "+admin._id)
         if (!admin) {
             console.log('Administrador no encontrado');
             return res.status(404).send({ message: 'Credenciales inválidas' });
