@@ -64,7 +64,7 @@ app.post("/send-email", async (req, res) => {
                 <br>
                 Haz clic en el siguiente botón para acceder a tu cuenta:
             </p>
-            <a href="http://google.com" style="display: block; text-align: center; background: red; color: white; padding: 12px 16px; border-radius: 9px; margin: 20px auto; text-decoration: none;">
+            <a href="http://localhost:5173/login" style="display: block; text-align: center; background: red; color: white; padding: 12px 16px; border-radius: 9px; margin: 20px auto; text-decoration: none;">
                 Inicia Sesión en la aplicación
             </a>
         </div>

@@ -17,10 +17,11 @@ export const register = async (req, res) => {
             }
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        const passwordRegex = /^@[A-Z\W_]{7}$/;
         if (!data.contrasena || typeof data.contrasena !== 'string' || !passwordRegex.test(data.contrasena)) {
             return res.status(400).send({ 
-                message: 'La contraseña debe tener mínimo 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.' 
+                message: 'La contraseña debe tener exactamente 8 caracteres, comenzar con el símbolo @ y contener solo letras mayúsculas y caracteres especiales, sin números.'
+
             });
         }
 
@@ -55,14 +56,14 @@ export const login = async (req, res) => {
         }
         
         let admin = await Admin.findOne({ usuario });
-        console.log("Id: "+admin._id)
         if (!admin) {
             console.log('Administrador no encontrado');
             return res.status(404).send({ message: 'Credenciales inválidas' });
         }
-        
-        const isPasswordValid = await checkPassword(contrasena, admin.contrasena);        
 
+        // Verificar si la contraseña es válida comparando con la cifrada
+        const isPasswordValid = await checkPassword(contrasena, admin.contrasena);
+        
         if (isPasswordValid) {
             const loggedUser = {
                 uid: admin._id,
@@ -86,8 +87,6 @@ export const login = async (req, res) => {
     }
 };
 
-
-
 export const update = async (req, res) => {
     try {
         const { id } = req.params; 
@@ -97,14 +96,17 @@ export const update = async (req, res) => {
             return res.status(403).send({ message: 'No autorizado para actualizar este usuario' });
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-        if (!data.contrasena || typeof data.contrasena !== 'string' || !passwordRegex.test(data.contrasena)) {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])(?!.*@).{8,}$/;
+
+        if (data.contrasena && (typeof data.contrasena === 'string' && !passwordRegex.test(data.contrasena))) {
             return res.status(400).send({ 
-                message: 'La contraseña debe tener mínimo 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.' 
+               message: 'La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial. No se permite el símbolo @.'
             });
         }
 
-        data.contrasena = await encrypt(data.contrasena);
+        if (data.contrasena) {
+            data.contrasena = await encrypt(data.contrasena);
+        }
 
         const updatedAdmin = await Admin.findOneAndUpdate(
             { _id: id },
@@ -122,6 +124,7 @@ export const update = async (req, res) => {
         return res.status(500).send({ message: 'Error al actualizar usuario' });
     }
 };
+
 
 export const deleteAdmin = async (req, res) => {
     try {

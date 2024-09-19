@@ -22,7 +22,7 @@ export const validateEmail=(email)=>{
 }
 
 export const validateCodigo = (codigo) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/
+    const regex = /^@[A-Z\W_]{7}$/;
     return regex.test(codigo);
 };
 
@@ -37,5 +37,5 @@ export const nombresAdminValidationMessage = 'El nombre del empleado debe ser de
 export const apellidosAdminValidationMessage = 'El apellido del empleado debe ser de entre 3 y 100 caracteres, con espacios permitidos.';
 export const usuarioAdminValidationMessage = 'El usuario del admin debe ser de entre 3 y 100 caracteres, todo en letras minúsculas.';
 export const emailAdminValidationMessage = 'Recuerde que debe llevar la estructura de un email válido'
-export const codigoAdminInincialValidationMessage = 'La contraseña inicial debe ser entre 3 y 100 caracteres'
+export const codigoAdminInincialValidationMessage = 'La contraseña debe tener exactamente 8 caracteres, comenzar con el símbolo @ y contener solo letras mayúsculas y caracteres especiales, sin números.'
 export const telefonoAdminValidationMessage = 'El teléfono debe ser 8 dígitos, sin espacios permitidos.'

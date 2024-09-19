@@ -19,31 +19,38 @@ export const useLogin = () => {
 
             if (response.error) {
                 toast.error('Error al logearse');
-                return false;  
+                return false;
             }
             
             toast.success('Bienvenido ' + usuario);            
             localStorage.setItem('token', response.data.token);
             
-            // Obtener el userId desde response.data.loggedUser.uid
             const userId = response.data.loggedUser.uid;
             console.log("ID del usuario:", userId);
+            
+            if(contrasena.includes("@")) {
+                const newPassword = prompt('Por favor, ingrese una nueva contraseña:');
+                console.log("Nueva contraseña:", newPassword);
 
-            // Mostrar el prompt para la nueva contraseña
-            const newPassword = prompt('Por favor, ingrese una nueva contraseña:');
-            console.log(newPassword);
-            if (newPassword) {
-                setIsUpdatingPassword(true);
-                await updatePasswordRequest(userId, { contrasena: newPassword });
-                toast.success('Contraseña actualizada con éxito');
+                if (newPassword) {
+                    setIsUpdatingPassword(true);
+                    const updateResponse = await updatePasswordRequest(userId, { contrasena: newPassword });
+                    
+                    if (updateResponse.error) {
+                        toast.error('Error al actualizar la contraseña');
+                    } else {
+                        toast.success('Contraseña actualizada con éxito');
+                    }
+                    setIsUpdatingPassword(false);
+                }
             }
 
-            return true;  
+            return true;
         } catch (error) {
             setIsLoading(false);
             setIsUpdatingPassword(false);
             toast.error('Error en el proceso de login o actualización de contraseña');
-            return false;  
+            return false;
         }
     };
 

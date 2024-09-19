@@ -276,14 +276,13 @@ export const registerAdminRequest=async(admin)=>{
 }
 
 //UPDATE PASWORD
-
-export const updatePasswordRequest=async(userId, updatedPassword)=>{
+export const updatePasswordRequest = async (userId, updatedPassword) => {
     try {
-        return await apiClient.put(`/actualizarMiPerfil/${userId}`, updatedPassword)
+        return await apiClient.put(`/actualizarMiPerfil/${userId}`, updatedPassword);
     } catch (error) {
-        return{
+        return {
             error: true,
-            err
-        }
+            err: error
+        };
     }
-}
+};
