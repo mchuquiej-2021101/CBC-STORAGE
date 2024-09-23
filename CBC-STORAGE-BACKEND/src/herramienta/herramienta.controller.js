@@ -151,3 +151,39 @@ export const search=async(req,res)=>{
         return res.status(500).send({message: 'Error al buscar herramienta'})
     }
 }
+
+//PARA LA GRÁFICA
+export const getHerramientasConDatos = async (req, res) => {
+    try {
+        let herramientas = await Herramienta.find();
+        let prestamos = await Prestamo.find()
+            .populate('herramienta', ['nombre']); 
+
+        if (herramientas.length == 0) return res.status(404).send({ message: 'No hay herramientas que mostrar' });
+
+        
+        const prestamosCount = prestamos.reduce((acc, prestamo) => {
+            const herramientaNombre = prestamo.herramienta.nombre;
+            acc[herramientaNombre] = (acc[herramientaNombre] || 0) + prestamo.cantidadHerramientas;
+            return acc;
+        }, {});
+
+        
+        const chartData = herramientas.map(herramienta => {
+            const nombre = herramienta.nombre;
+            const cantidadPrestada = prestamosCount[nombre] || 0;
+            const cantidadDisponible = herramienta.stock; 
+
+            return {
+                nombre: nombre,
+                prestado: cantidadPrestada,
+                disponible: cantidadDisponible
+            };
+        });
+
+        return res.send({ chartData });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Error al obtener los datos' });
+    }
+};

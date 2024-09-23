@@ -5,20 +5,21 @@ import { HerramientaPage } from './pages/HerramientaPage';
 import { PrestamoPage } from './pages/PrestamoPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AuthPage } from './pages/AuthPage';
-import { UnauthorizedPage } from './pages/UnauthorizedPage'; 
+import { UnauthorizedPage } from './pages/UnauthorizedPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { HomePage } from './pages/HomePage';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute'; 
+import ProtectedRoute from './components/ProtectedRoute';
+import SimpleBarChartDouble from './components/SimpleBarChartDouble';
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path='/login' element={<AuthPage />} />
-        <Route path='/unauthorized' element={<UnauthorizedPage />} /> 
-        
+        <Route path='/unauthorized' element={<UnauthorizedPage />} />
+
         <Route path='/empleado' element={
           <ProtectedRoute>
             <EmpleadoPage />
@@ -48,16 +49,23 @@ function App() {
         <Route path='/register' element={
           <ProtectedRoute>
             <RegisterPage />
-          </ProtectedRoute>          
-          } />
+          </ProtectedRoute>
+        } />
 
         <Route path='/homePage' element={
           <ProtectedRoute>
             <HomePage />
-          </ProtectedRoute>          
-          } />
-        
-        
+          </ProtectedRoute>
+        } />
+
+        <Route path='/estadisticas' element={
+          <ProtectedRoute>
+            <h2>Estadísticas de las Herramientas</h2>
+            <SimpleBarChartDouble />
+          </ProtectedRoute>
+        } />
+
+
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
 
