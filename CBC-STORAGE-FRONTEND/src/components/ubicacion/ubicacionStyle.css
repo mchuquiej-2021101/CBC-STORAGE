@@ -1,0 +1,151 @@
+.tituloU {
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    font-size: 380%;
+}
+
+/*---------- ESTILOS DE LA TABLA -----------*/
+.table {
+    margin-top: 10px; /*Añade espacio arriba del componente */
+    border-radius: 12px;
+    overflow: hidden;
+    /* Asegura que el borde de la tabla no se desborde xd */
+}
+
+/*---------- ESTILOS DE LOS BOTONES -----------*/
+.btnUno {
+    --bg: #27ae60;
+    --text-color: #fff;
+    position: relative;
+    width: 155px;
+    border: none;
+    background: var(--bg);
+    color: var(--text-color);
+    padding: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.2s;
+    border-radius: 8px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+    box-shadow: #1e8449 0px 7px 2px, #000 0px 8px 5px;
+}
+
+.btnUno:hover {
+    opacity: 1;
+}
+
+.btnUno:active {
+    top: 4px;
+    box-shadow: #1e8449 0px 3px 2px, #000 0px 3px 5px;
+}
+
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-group .btnUno,
+.button-group .btnDos {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/*------ BOTON DOS------*/
+.btnDos {
+    --bg: #e74c3c;
+    --text-color: #fff;
+    position: relative;
+    width: 155px;
+    border: none;
+    background: var(--bg);
+    color: var(--text-color);
+    padding: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.2s;
+    border-radius: 8px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+    box-shadow: #c0392b 0px 7px 2px, #000 0px 8px 5px;
+}
+
+.btnDos:hover {
+    opacity: 1;
+}
+
+.btnDos:active {
+    top: 4px;
+    box-shadow: #c0392b 0px 3px 2px, #000 0px 3px 5px;
+}
+
+
+/*---------- ESTILOS DE LOS IMPUTS -----------*/
+.input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.input-label {
+    text-align: center;
+    font-weight: bold;
+    /*Pone en negrita el texto del input*/
+    margin-bottom: 0.5rem;
+    /*AÑADE espacio debajo del input */
+    
+    
+}
+
+.input-field {
+    flex: 1;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.input-textarea {
+    padding: 0.5rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    /* Espacio entre los dos inputs */
+}
+
+.intentoUno {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    /* Espacio entre los dos inputs */
+}
+
+.DIVS {
+    display: flex;
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+  }
+  
+  .navbar-nav .nav-link {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 992px) {
+    /* Opcional: Ajusta el espacio entre los enlaces cuando esté colapsado */
+    .navbar-nav .nav-item {
+      margin-bottom: 10px;
+    }
+  }
+
+   /* 25-09-2024 */ 
