@@ -15,6 +15,7 @@ export const useUbicacion=()=>{
             }
             const response=await addUbicacionRequest(ubicacionModelo)
             console.log(response)
+            toast.success('Ubicación agregada exitosamente')
             await getUbicaciones()
         } catch (error) {
             toast.error('Error al agregar ubicación')

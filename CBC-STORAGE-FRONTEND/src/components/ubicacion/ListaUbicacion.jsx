@@ -1,38 +1,34 @@
 import { useState, useEffect } from "react";
-import { Input } from '../Input'
+import {Input} from '../Input'
 import { useUbicacion } from "../../shared/hooks/useUbicacion.jsx";
-import '../ubicacion/ubicacionStyle.css'
-import toast from "react-hot-toast";
-
 import {
     validateUbicacion,
     ubicacionUbicacionValidationMessage,
     validateCapacidad,
     capacidadUbicacionValidationMessage
 } from '../../shared/validators/validatorUbicacion.js'
-//import Navbar from "../navBar.jsx";
+import toast from "react-hot-toast";
 
+export const TodoListFormUbicacion=()=>{
+    const {addUbicacion, getUbicaciones, updateUbicacion, deleteUbicacion, ubicaciones, isLoading}=useUbicacion()
 
-export const TodoListFormUbicacion = () => {
-    const { addUbicacion, getUbicaciones, updateUbicacion, deleteUbicacion, ubicaciones, isLoading } = useUbicacion()
-
-    const initialFormData = {
-        ubicacion: {
+    const initialFormData={
+        ubicacion:{
             value: "",
             isValid: false,
             showError: false
         },
-        capacidad: {
+        capacidad:{
             value: "",
             isValid: false,
             showError: false
         }
     }
 
-    const [formData, setFormData] = useState(initialFormData)
-    const [editingUbicacionId, setEditingUbicacionId] = useState(null)
+    const [formData, setFormData]=useState(initialFormData)
+    const [editingUbicacionId, setEditingUbicacionId]=useState(null)
 
-    const fetchUbicacion = async () => {
+    const fetchUbicacion=async()=>{
         try {
             await getUbicaciones()
         } catch (error) {
@@ -40,31 +36,31 @@ export const TodoListFormUbicacion = () => {
         }
     }
 
-    const handleValueChange = (value, field) => {
+    const handleValueChange=(value, field)=>{
         setFormData(prevData => ({
             ...prevData,
-            [field]: {
+            [field]:{
                 ...prevData[field],
                 value
             }
         }))
     }
 
-    const handleValidationOnBlur = (value, field) => {
-        let isValid = false
-        switch (field) {
+    const handleValidationOnBlur=(value, field)=>{
+        let isValid=false
+        switch(field){
             case "ubicacion":
-                isValid = validateUbicacion(value)
+                isValid=validateUbicacion(value)
                 break;
             case "capacidad":
-                isValid = validateCapacidad(value)
+                isValid=validateCapacidad(value)
                 break;
             default:
                 break
         }
-        setFormData(prevData => ({
+        setFormData(prevData=>({
             ...prevData,
-            [field]: {
+            [field]:{
                 ...prevData[field],
                 value,
                 isValid,
@@ -73,21 +69,21 @@ export const TodoListFormUbicacion = () => {
         }))
     }
 
-    const handleAddUbicacion = async (e) => {
+    const handleAddUbicacion=async(e)=>{
         e.preventDefault()
         try {
-            if (editingUbicacionId) {
-                await updateUbicacion(editingUbicacionId, {
+            if(editingUbicacionId){
+                await updateUbicacion(editingUbicacionId,{
                     ubicacion: formData.ubicacion.value,
                     capacidad: formData.capacidad.value
                 })
                 toast.success('Ubicación actualizada exitosamente')
-            } else {
+            }else{
                 await addUbicacion(
                     formData.ubicacion.value,
                     formData.capacidad.value
                 )
-                toast.success('Ubicación agregada exitosamente')
+                //toast.success('Ubicación agregada exitosamente')
             }
             setFormData(initialFormData)
             setEditingUbicacionId(null)
@@ -98,16 +94,16 @@ export const TodoListFormUbicacion = () => {
         }
     }
 
-    const handleEditUbicacion = (ubicacionId) => {
-        const ubicacionToEdit = ubicaciones.find(ubicacion => ubicacion._id === ubicacionId)
-        if (ubicacionToEdit) {
+    const handleEditUbicacion=(ubicacionId)=>{
+        const ubicacionToEdit=ubicaciones.find(ubicacion=>ubicacion._id === ubicacionId)
+        if(ubicacionToEdit){
             setFormData({
-                ubicacion: {
+                ubicacion:{
                     value: ubicacionToEdit.ubicacion,
                     isValid: true,
                     showError: false
                 },
-                capacidad: {
+                capacidad:{
                     value: ubicacionToEdit.capacidad,
                     isValid: true,
                     showError: false
@@ -117,8 +113,8 @@ export const TodoListFormUbicacion = () => {
         }
     }
 
-    const handleDeleteUbicacion = async (ubicacionId) => {
-        if (window.confirm('¿Estás seguro de eliminar la ubicación?')) {
+    const handleDeleteUbicacion=async(ubicacionId)=>{
+        if(window.confirm('¿Estás seguro que quieres eliminar la ubicación?')){
             try {
                 await deleteUbicacion(ubicacionId)
                 toast.success('Ubicación eliminada exitosamente')
@@ -130,95 +126,73 @@ export const TodoListFormUbicacion = () => {
         }
     }
 
-    const cancel = () => {
+    const cancel=()=>{
         setFormData(initialFormData)
     }
 
-    const isSubmitButtonDisabled =
+    const isSubmitButtonDisabled=
         !formData.ubicacion.isValid ||
         !formData.ubicacion.isValid
 
     return (
-        
         <div>
-            {/*<Navbar></Navbar>*/}
-            <h2 className="tituloU">Ubicaciones</h2>
-
             <form onSubmit={handleAddUbicacion}>
-                <div className="intentoUno">
-                    <Input
-                        field="ubicacion"
-                        value={formData.ubicacion.value}
-                        onChangeHandler={handleValueChange}
-                        type="text"
-                        onBlurHandler={handleValidationOnBlur}
-                        showErrorMessage={formData.ubicacion.showError}
-                        validationMessage={ubicacionUbicacionValidationMessage}
-                    />
-                    <Input
-                        field="capacidad"
-                        value={formData.capacidad.value}
-                        onChangeHandler={handleValueChange}
-                        type="text" //puede dar error
-                        onBlurHandler={handleValidationOnBlur}
-                        showErrorMessage={formData.capacidad.showError}
-                        validationMessage={capacidadUbicacionValidationMessage}
-                        
-                    />
-                </div>
-
+                <Input
+                    field="ubicacion"
+                    label="Ubicación"
+                    value={formData.ubicacion.value}
+                    onChangeHandler={handleValueChange}
+                    type="text"
+                    onBlurHandler={handleValidationOnBlur}
+                    showErrorMessage={formData.ubicacion.showError}
+                    validationMessage={ubicacionUbicacionValidationMessage}
+                />
+                <Input
+                    field="capacidad"
+                    label="Capacidad"
+                    value={formData.capacidad.value}
+                    onChangeHandler={handleValueChange}
+                    type="text" //puede dar error
+                    onBlurHandler={handleValidationOnBlur}
+                    showErrorMessage={formData.capacidad.showError}
+                    validationMessage={capacidadUbicacionValidationMessage}
+                />
                 <div></div>
+                <button type="submit" disabled={isSubmitButtonDisabled}>
+                    {editingUbicacionId ? 'Actualizar Ubicación' : 'Agregar Ubicación'}
+                </button>
+                <button type="submit" onClick={cancel}>
+                    Cancelar
+                </button>
             </form>
-            
-            {/*PARA QUE LA TABLA TENGA ESTILO.*/}
-            <div className="table-responsive">
-                <table className="table table-striped">
+            <div>
+                <h2>Ubicaciones</h2>
+                <table>
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>UBICACIÓN</th>
-                            <th>CAPACIDAD</th>
-                            <th>EDITAR</th>
-                            <th>ELIMINAR</th>
+                            <th>Ubicación</th>
+                            <th>Capacidad</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {ubicaciones && ubicaciones.length > 0 && ubicaciones.map((ubicacion, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td> {/* Aquí se muestra el número, cada vez que se agrega un dato nuevo*/}
-                                <td>{ubicacion.ubicacion}</td>
-                                <td>{ubicacion.capacidad}</td>
-                                <td>
+                    {ubicaciones && ubicaciones.length > 0 && ubicaciones.map((ubicacion, index) => (
+                        <tr key={index}>
+                            <td>{ubicacion.ubicacion}</td>
+                            <td>{ubicacion.capacidad}</td>
+                            <td>
                                     <svg onClick={() => handleEditUbicacion(ubicacion._id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                         <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                     </svg>
-                                </td>
-                                <td>
                                     <svg onClick={() => handleDeleteUbicacion(ubicacion._id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
                                         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                                     </svg>
                                 </td>
-                            </tr>
-                        ))}
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
-
-            {/*---------------- BOTONES ----------------*/}
-            <form onSubmit={handleAddUbicacion}>
-                <div className="button-group ">
-
-                    <button type="submit" disabled={isSubmitButtonDisabled} className="btnUno">
-                        {editingUbicacionId ? 'ACTUALIZAR' : 'AGREGAR'}
-                    </button>
-
-                    <button type="submit" onClick={cancel} className="btnDos">
-                        CANCELAR
-                    </button>
-                </div>d,
-            </form>
         </div>
     )
-    
 }
