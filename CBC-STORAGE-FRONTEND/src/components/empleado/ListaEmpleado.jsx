@@ -166,7 +166,8 @@ export const TodoListFormEmpleado = () => {
     }
 
     const cancel = () => {
-        setFormData(initialFormData)
+        setFormData(initialFormData)              
+        setEditingEmpleadoId(null);
     }
 
     const isSubmitButtonDisabled =

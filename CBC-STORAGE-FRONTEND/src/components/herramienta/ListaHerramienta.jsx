@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Input } from '../Input'
 import { useHerramienta } from "../../shared/hooks/useHerramienta.jsx";
 import {
-    skuHerramientaValidationMessage,
-    validateSku,
     nombreHerramientaValidationMessage,
     validateNombre,
     stockHerramientaValidationMessage,
@@ -34,11 +32,6 @@ export const TodoListFormHerramienta = () => {
     }, []);
 
     const initialFormData = {
-        SKU: {
-            value: "",
-            isValid: false,
-            showError: false
-        },
         nombre: {
             value: "",
             isValid: false,
@@ -103,9 +96,6 @@ export const TodoListFormHerramienta = () => {
     const handleValidationOnBlur = (value, field) => {
         let isValid = false;
         switch (field) {
-            case "SKU":
-                isValid = validateSku(value);
-                break;
             case "nombre":
                 isValid = validateNombre(value);
                 break;
@@ -145,7 +135,6 @@ export const TodoListFormHerramienta = () => {
         try {
             if (editingHerramientaId) {
                 await updateHerramienta(editingHerramientaId, {
-                    SKU: formData.SKU.value,
                     nombre: formData.nombre.value,
                     stock: formData.stock.value,
                     marca: formData.marca.value,
@@ -156,7 +145,6 @@ export const TodoListFormHerramienta = () => {
                 toast.success('Herramienta actualizada exitosamente')
             } else {
                 await addHerramienta(
-                    formData.SKU.value,
                     formData.nombre.value,
                     formData.stock.value,
                     formData.marca.value,
@@ -179,11 +167,6 @@ export const TodoListFormHerramienta = () => {
         const herramientaToEdit = herramientas.find(herramienta => herramienta._id === herramientaId)
         if (herramientaToEdit) {
             setFormData({
-                SKU: {
-                    value: herramientaToEdit.SKU,
-                    isValid: true,
-                    showError: false
-                },
                 nombre: {
                     value: herramientaToEdit.nombre,
                     isValid: true,
@@ -234,10 +217,10 @@ export const TodoListFormHerramienta = () => {
 
     const cancel = () => {
         setFormData(initialFormData)
+        setEditingHerramientaId(null)
     }
 
     const isSubmitButtonDisabled =
-        !formData.SKU.isValid ||
         !formData.nombre.isValid ||
         !formData.stock.isValid ||
         !formData.marca.isValid ||
@@ -248,16 +231,6 @@ export const TodoListFormHerramienta = () => {
     return (
         <div>
             <form onSubmit={handleAddHerramienta}>
-                <Input
-                    field="SKU"
-                    label="SKU"
-                    value={formData.SKU.value}
-                    onChangeHandler={handleValueChange}
-                    type="text"
-                    onBlurHandler={handleValidationOnBlur}
-                    showErrorMessage={formData.SKU.showError}
-                    validationMessage={skuHerramientaValidationMessage}
-                />
                 <Input
                     field="nombre"
                     label="Nombre"

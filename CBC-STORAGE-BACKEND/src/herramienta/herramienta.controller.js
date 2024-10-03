@@ -3,12 +3,24 @@ import Categoria from '../categoria/categoria.model.js';
 import Ubicacion from '../ubicacion/ubicacion.model.js';
 import Prestamo from '../prestamo/prestamo.model.js'
 
+function generarNumerosAleatorios() {
+    let numeros = '';
+    for (let i = 0; i < 8; i++) {
+        numeros += Math.floor(Math.random() * 10); 
+    }
+    return numeros;
+}
+
+
 export const save = async (req, res) => {
     try {
         let data = req.body;
         
-        const requiredFields = ['SKU', 'nombre', 'stock', 'marca', 'modelo', 'categoria', 'ubicacion']; 
+        const requiredFields = ['nombre', 'stock', 'marca', 'modelo', 'categoria', 'ubicacion']; 
                 
+
+        data.SKU="GT-"+generarNumerosAleatorios()
+
         for (let field of requiredFields) {
             if (!data[field]) {
                 return res.status(400).send({ message: `El campo ${field} es obligatorio` });

@@ -6,11 +6,10 @@ export const useHerramienta=()=>{
     const [isLoading, setIsLoading]=useState(false)
     const [herramientas, setHerramientas]=useState()
 
-    const addHerramienta=async(SKU, nombre, stock, marca, modelo, categoria, ubicacion)=>{        
+    const addHerramienta=async(nombre, stock, marca, modelo, categoria, ubicacion)=>{        
         setIsLoading(true)
         try {
             const herramienta={
-                SKU,
                 nombre,
                 stock,
                 marca,

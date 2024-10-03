@@ -110,7 +110,8 @@ export const TodoListFormCategoria=()=>{
     }
 
     const cancel=()=>{
-        setFormData(initialFormData)
+        setFormData(initialFormData)        
+        setEditingCategoriaId(null);
     }
 
     const isSubmitButtonDisabled= !formData.categoria.isValid

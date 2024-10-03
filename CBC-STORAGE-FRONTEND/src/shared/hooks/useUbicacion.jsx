@@ -37,6 +37,7 @@ export const useUbicacion=()=>{
         try {
             const response=await updateUbicacionRequest(ubicacionId, updatedUbicacion)
             console.log(response)
+            toast.success('Ubicación actualizada exitosamente')
             await getUbicaciones()
         } catch (error) {
             console.error('Error al actualizar ubicación')

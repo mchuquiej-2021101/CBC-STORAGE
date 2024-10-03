@@ -77,7 +77,7 @@ export const TodoListFormUbicacion=()=>{
                     ubicacion: formData.ubicacion.value,
                     capacidad: formData.capacidad.value
                 })
-                toast.success('Ubicación actualizada exitosamente')
+                //toast.success('Ubicación actualizada exitosamente')
             }else{
                 await addUbicacion(
                     formData.ubicacion.value,
@@ -128,6 +128,7 @@ export const TodoListFormUbicacion=()=>{
 
     const cancel=()=>{
         setFormData(initialFormData)
+        setEditingUbicacionId(null);
     }
 
     const isSubmitButtonDisabled=
@@ -161,7 +162,7 @@ export const TodoListFormUbicacion=()=>{
                 <button type="submit" disabled={isSubmitButtonDisabled}>
                     {editingUbicacionId ? 'Actualizar Ubicación' : 'Agregar Ubicación'}
                 </button>
-                <button type="submit" onClick={cancel}>
+                <button type="button" onClick={cancel}>
                     Cancelar
                 </button>
             </form>
