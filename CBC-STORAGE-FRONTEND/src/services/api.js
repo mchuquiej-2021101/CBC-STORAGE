@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const apiClient=axios.create({
     baseURL: 'http://localhost:2880',
@@ -171,16 +172,19 @@ export const deleteCategoriaRequest=async(categoriaId)=>{
 }
 
 //HERRAMIENTA
-export const addHerramientaRequest=async(herramienta)=>{
+export const addHerramientaRequest = async (herramienta) => {
     try {
-        return await apiClient.post('/agregarHerramienta', herramienta)
+        const response = await apiClient.post('/agregarHerramienta', herramienta);
+        toast.success("Herramienta agregada exitosamente"); // Mueve el toast aquí
+        return response; // Devuelve la respuesta si es exitosa
     } catch (err) {
-        return{
+        return {
             error: true,
             err
-        }
+        };
     }
-}
+};
+
 
 export const getHerramientasRequest=async()=>{
     try {

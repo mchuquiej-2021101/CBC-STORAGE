@@ -30,6 +30,7 @@ export const TodoListFormHerramienta = () => {
         getCategorias();
         getUbicaciones()
     }, []);
+    
 
     const initialFormData = {
         nombre: {
@@ -152,7 +153,7 @@ export const TodoListFormHerramienta = () => {
                     formData.categoria.value,
                     formData.ubicacion.value
                 )
-                toast.success('Herramienta agregada exitosamente')
+                /* toast.success('Herramienta agregada exitosamente') */
             }
             setFormData(initialFormData)
             setEditingHerramientaId(null)
@@ -220,13 +221,16 @@ export const TodoListFormHerramienta = () => {
         setEditingHerramientaId(null)
     }
 
+    var stockMayor=false;
+
     const isSubmitButtonDisabled =
         !formData.nombre.isValid ||
         !formData.stock.isValid ||
         !formData.marca.isValid ||
         !formData.modelo.isValid ||
         !formData.categoria.isValid ||
-        !formData.ubicacion.isValid
+        !formData.ubicacion.isValid /* ||
+        stockMayor==true */
 
     return (
         <div>
@@ -287,18 +291,53 @@ export const TodoListFormHerramienta = () => {
                 </div>
 
                 <div>
-                <select
-                    value={formData.ubicacion.value}
-                    onChange={(e) => handleValueChange(e.target.value, 'ubicacion')}
-                    onBlur={() => handleValidationOnBlur(formData.ubicacion.value, 'ubicacion')}
-                    required
-                >
-                    <option value="">Seleccione la Ubicación</option>
-                    {ubicaciones.map((ubicacion) => (
-                        <option key={ubicacion._id} value={ubicacion._id}>{ubicacion.ubicacion}</option>
-                    ))}
-                </select>
-                </div>
+    <select
+        value={formData.ubicacion.value}
+        onChange={(e) => {
+            const selectedUbicacionId = e.target.value; // Obtiene el ID de la ubicación seleccionada
+            handleValueChange(selectedUbicacionId, 'ubicacion');
+
+            // Encuentra la ubicación correspondiente en el array de ubicaciones
+            const selectedUbicacion = ubicaciones.find(ubicacion => ubicacion._id === selectedUbicacionId);
+            
+            if (selectedUbicacion) {
+                console.log("Capacidad de la ubicación seleccionada:", selectedUbicacion.capacidad); // Imprime la capacidad
+            }
+
+            if(selectedUbicacion.capacidad<formData.stock.value){
+                console.log("capacidad menor")
+                toast.error("La ubicación "+selectedUbicacion.ubicacion+" solo tiene capacidad para almacenar "+selectedUbicacion.capacidad+" elementos")
+                /* stockMayor=true;
+                console.log("Stock mayor: "+stockMayor) */
+                setFormData(prevData => ({
+                   ...prevData,
+                    stock: {
+                        value: "",
+                        isValid: false,
+                        showError: true,
+                        errorMessage: "La ubicación seleccionada solo tiene capacidad para almacenar "+selectedUbicacion.capacidad+" elementos"
+                    },
+                    ubicacion: {
+                        value: "",
+                        isValid: true,
+                        showError: false
+                    }
+                })); 
+            }
+            if(formData.stock.value<selectedUbicacion.capacidad){
+                console.log("capacidad mayor")
+            }
+        }}
+        onBlur={() => handleValidationOnBlur(formData.ubicacion.value, 'ubicacion')}
+        required
+    >
+        <option value="">Seleccione la Ubicación</option>
+        {ubicaciones.map((ubicacion) => (
+            <option key={ubicacion._id} value={ubicacion._id}>{ubicacion.ubicacion}</option>
+        ))}
+    </select>
+</div>
+
 
 
 
@@ -321,7 +360,7 @@ export const TodoListFormHerramienta = () => {
                             <th>Stock</th>
                             <th>Marca</th>
                             <th>Modelo</th>
-                            <th>Categoría</th>
+                            {/* <th>Categoría</th> */} 
                             <th>Ubicación</th>
                         </tr>
                     </thead>
@@ -333,7 +372,7 @@ export const TodoListFormHerramienta = () => {
                                 <td>{herramienta.stock}</td>
                                 <td>{herramienta.marca}</td>
                                 <td>{herramienta.modelo}</td>
-                                <td>{herramienta.categoria.categoria}</td>
+                                {/* <td>{herramienta.categoria.categoria}</td> */} 
                                 <td>{herramienta.ubicacion.ubicacion}</td>
                                 <td>
                                     <svg onClick={() => handleEditHerramienta(herramienta._id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">

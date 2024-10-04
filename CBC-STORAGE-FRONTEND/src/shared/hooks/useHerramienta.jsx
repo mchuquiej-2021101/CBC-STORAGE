@@ -17,9 +17,11 @@ export const useHerramienta=()=>{
                 categoria,
                 ubicacion
             }
+            console.log(ubicacion.capacidad+"dsafsdakjfhdalkfjhsdafkj")
             const response=await addHerramientaRequest(herramienta)
             console.log(response)
             await getHerramientas()
+            /* toast.success('Herramienta agregada exitosamente') */
         } catch (error) {
             toast.error('Error al agregar la herramienta')
         }finally{
